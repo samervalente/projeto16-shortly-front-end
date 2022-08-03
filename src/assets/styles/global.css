@@ -1,0 +1,21 @@
+*{box-sizing: border-box}
+
+:root{
+    --green: #5D9040;
+    --gray: #9C9C9C;
+}
+
+body{
+    font-family: 'Lexend Deca', sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.Container{
+    width: 70%;
+    margin-top:50px;
+    display: flex;
+    flex-direction: column;
+    
+}
