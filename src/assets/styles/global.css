@@ -14,8 +14,11 @@ body{
 
 .Container{
     width: 70%;
-    margin-top:50px;
     display: flex;
     flex-direction: column;
     
+}
+
+.Container.Form{
+    align-items: center;
 }

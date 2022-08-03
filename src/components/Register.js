@@ -8,13 +8,17 @@ import Button from "../shared/Button"
 export default function Register(){
     return (
         <>
-             <TopBar>
-             <Link to="/">
-                <div className="entry">Entrar</div>
-            </Link>
+             <TopBar justify={'flex-end'} linkRoute={'/'}>
+             
+                <ul>
+                    <Link to="/login">
+                        <li className="entry">Entrar</li>
+                    </Link>
+                </ul>
+          
                
             </TopBar>
-            <form className="Container">
+            <form className="Container Form">
                 <Input placeholder={'Nome'}  />
                 <Input placeholder={'Email'}  />
                 <Input placeholder={'Senha'} />

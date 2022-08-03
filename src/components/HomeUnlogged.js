@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom"
 import styled from "styled-components"
 import TopBar from "../shared/TopBar"
 
@@ -6,15 +7,15 @@ import { FaTrophy } from "react-icons/fa"
 export default function Ranking(){
     return (
         <>
-            <TopBar justify={'space-between'}> 
-            <span>Seja bem vindo, Fulano</span>   
-            <div>
+            <TopBar justify={'flex-end'}>  
                 <ul>
-                    <li>Home</li>
-                    <li>Ranking</li>
-                    <li>Sair</li>
+                    <Link to="/login">
+                        <li className="entry">Entrar</li>
+                    </Link>
+                    <Link to="/register">
+                        <li>Cadastrar-se</li> 
+                    </Link>            
                 </ul>   
-            </div>
             </TopBar>
             <Main className="Container">
                 <div className="RankingLabel">
@@ -29,9 +30,9 @@ export default function Ranking(){
                         <li className="userRankingSection">
                             <span className="nameRanking">Fulaninho - </span>
                             <span>32 links - 1.703.584 visualizações</span>
-                        </li>
-                        
+                        </li> 
                 </RankingList>
+                <h2>Crie sua conta para usar nosso serviço!</h2>
             </Main>
             
         </>
@@ -49,14 +50,16 @@ const Main = styled.div`
             color:#FFD233;
             font-size:52px;
             margin-right: 10px;
+        }   
+    }
+    h2{
+            font-weight: 700;
+            font-size:36px;    
         }
 
-        h2{
-            font-weight: 700;
-            font-size:36px;
-            
+        > :last-child{
+            margin-top:20px;
         }
-    }
 `
 
 const RankingList = styled.ol`

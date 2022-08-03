@@ -1,15 +1,16 @@
 import styled from "styled-components"
 import Logo from "../assets/images/Logo.png"
+import { Link } from "react-router-dom"
 
-export default function TopBar( {children} ){
+export default function TopBar( {children, justify} ){
     return (
         <>
-            <TopBarSection justify={'flex-end'} className="Container TopBar">
+            <TopBarSection justify={justify} className="Container TopBar">
                 {children}
             </TopBarSection>
             <LogoSection>
                 <h1>Shortly</h1>
-                <img src={Logo} alt="Logo" />
+                    <img src={Logo} alt="Logo" />     
             </LogoSection>
         </>
     )
@@ -21,16 +22,20 @@ height:50px;
 align-items: center;
 justify-content: ${props => props.justify};
 font-size:14px;
-
+margin-top: 20px;
     .entry{
         color:var(--green);
         margin-right:20px;
     }
 
-    div{
-        cursor:pointer;
+
+    ul{
+        display: flex;
+        li{
+            cursor:pointer;
         color:var(--gray);
         margin: 0px 8px;
+        }
     }
 
     a{
@@ -43,6 +48,7 @@ font-size:14px;
 const LogoSection = styled.div`
     display: flex;
     align-items: center;
+   
 
     h1{
         font-size:64px;

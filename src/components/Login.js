@@ -16,12 +16,15 @@ export default function Login(){
 
     return (
         <>
-            <TopBar>
-                <Link to="/register">
-                    <div>Cadastrar-se</div>
-                </Link>
+            <TopBar justify={'flex-end'}>
+                    <ul>
+                        <Link to="/register">
+                            <li>Cadastrar-se</li>
+                        </Link>
+                    </ul>
             </TopBar>
-            <form className="Container" onSubmit={() => handleSubmit}>
+            
+            <form className="Container Form" onSubmit={() => handleSubmit}>
                 <Input placeholder={'Email'}  />
                 <Input placeholder={'Senha'} />
                 <Button label={'Entrar'} />
