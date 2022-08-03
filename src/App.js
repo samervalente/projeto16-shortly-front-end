@@ -5,10 +5,18 @@ import HomeLogged from "./components/HomeLogged"
 import HomeUnlogged from "./components/HomeUnlogged"
 import Ranking from "./components/Ranking"
 
+import userContext from "./contexts/userContext"
+import { useState } from "react"
+
 export default function App(){
+    const [user, setUser] = useState({
+        name:"",
+        token:""
+    })
+
     return (
         <>
-      
+      <userContext.Provider value={{user, setUser}}>
         <BrowserRouter>
             <Routes>
                 <Route path="/" element ={<HomeUnlogged />} />
@@ -18,6 +26,7 @@ export default function App(){
                 <Route path="/ranking" element={<Ranking />} />
             </Routes>
         </BrowserRouter>
+    </userContext.Provider>
             
         </>
     )

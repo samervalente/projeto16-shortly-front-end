@@ -1,8 +1,8 @@
 import styled from "styled-components";
 
-export default function Input({placeholder, onChange}){
+export default function Input({placeholder, onChange, type}){
     return (
-        <InputSection placeholder={placeholder} onChange={onChange} />
+        <InputSection placeholder={placeholder} onChange={onChange} type={type} />
     )
 }
 

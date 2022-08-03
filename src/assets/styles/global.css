@@ -7,18 +7,22 @@
 
 body{
     font-family: 'Lexend Deca', sans-serif;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
 }
 
 .Container{
     width: 70%;
     display: flex;
     flex-direction: column;
+   
     
 }
 
 .Container.Form{
+    align-items: center;
+}
+
+#root{
+    display: flex;
+    flex-direction: column;
     align-items: center;
 }

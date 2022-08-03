@@ -15,7 +15,9 @@ export default function HomeLogged(){
                 <ul>
                     <li>Home</li>
                     <li>Ranking</li>
-                    <li>Sair</li>
+                    <Link to="/">
+                        <li>Sair</li>
+                    </Link>
                 </ul>   
             </div>
              
