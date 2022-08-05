@@ -26,9 +26,7 @@ export default function Register(){
             }).catch(error => {
                 alert(error.data)
             })
-        }
-
-       
+        } 
     }
 
     return (

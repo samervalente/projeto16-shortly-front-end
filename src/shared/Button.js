@@ -1,8 +1,8 @@
 import styled from "styled-components";
 
-export default function Button({label}){
+export default function Button({label, onClick}){
     return (
-        <ButtonSection type='submit'>{label}</ButtonSection>
+        <ButtonSection onClick={onClick} type='submit'>{label}</ButtonSection>
     )
 }
 

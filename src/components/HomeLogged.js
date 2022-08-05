@@ -4,49 +4,73 @@ import {FaTrash} from "react-icons/fa"
 import TopBar from "../shared/TopBar"
 import Input from "../shared/Input"
 import Button from "../shared/Button"
-
+import { useEffect } from "react"
+import { useState, useContext } from "react"
+import userContext from "../contexts/userContext"
+import { getUserURLS, openShortURL, shortenURL, deleteShortURL } from "../services/url"
 
 export default function HomeLogged(){
+    const [urlToShort, setURLToShort] = useState({
+        url: ""
+    })
+    const [urls, setURLS] = useState([])
+    const {user} = useContext(userContext)
+    const config = {headers: { authorization: `Bearer ${user.token}`}}
+
+    useEffect(() => {
+        getUserURLS(config, setURLS)
+    }, [])
+
+    
+    function renderUserURLS(){
+        console.log(urls)
+       if(urls.length !== 0 ){ 
+        const userURLS = urls.shortenedUrls.map(obj => {
+            return (
+             <div className="URLSection">
+                 <div className="LinkInfosSection">
+                     <a className="linkURL"  href={obj.url} target="_blank"  rel="noreferrer">{obj.url}</a>
+                     <p  className="shortenedURL"onClick={() => openShortURL(obj.shortURL, config)}>{obj.shortURL}  </p>
+                     <p>Quantidade de visitantes: {obj.visitCount}</p>
+                 </div>
+                 <div className="TrashIconSection">
+                     <FaTrash onClick={() => deleteShortURL(obj.id, config, setURLS)} className={'TrashIcon'} />
+                 </div>
+              </div>
+            )
+            
+         })
+        
+         return userURLS.reverse()
+       }else{
+        return "Carregando..."
+       }   
+    }
+    
+   
     return (
         <>
         <TopBar justify={'space-between'}>
-        <span>Seja bem vindo, Fulano</span>   
+        <span>Seja bem vindo, {user.name}</span>   
             <div>
                 <ul>
                     <li>Home</li>
-                    <li>Ranking</li>
+                    <Link to="/ranking">
+                        <li>Ranking</li>
+                    </Link>
                     <Link to="/">
                         <li>Sair</li>
                     </Link>
                 </ul>   
             </div>
-             
         </TopBar>
         <Main className="Container">
             <div className="shortURL">
-                <Input placeholder={'Links que cabem no bolso'} />
-                <Button label={'Encurtar Link'} />
+                <Input placeholder={'Links que cabem no bolso'} onChange={(e) => setURLToShort({url: e.target.value})} />
+                <Button onClick={() => shortenURL(urlToShort, config, setURLS)} label={'Encurtar Link'} />
             </div>
-            <div className="URLSection">
-                <div className="LinkInfosSection">
-                    <a href="https://www.driven.com.br" >https://www.driven.com.br</a>
-                    <p>e4231A</p>
-                    <p>Quantidade de visitantes: 10</p>
-                </div>
-                <div className="TrashIconSection">
-                    <FaTrash  className={'TrashIcon'} />
-                </div>
-            </div>
-            <div className="URLSection">
-                <div className="LinkInfosSection">
-                    <a href="https://www.driven.com.br" >https://www.driven.com.br</a>
-                    <p>e4231A</p>
-                    <p>Quantidade de visitantes: 10</p>
-                </div>
-                <div className="TrashIconSection">
-                    <FaTrash  className={'TrashIcon'} />
-                </div>
-            </div>
+                {renderUserURLS()}
+           
         </Main>
         </>
     )
@@ -92,6 +116,17 @@ const Main = styled.div`
             color:white;
             padding: 0px 23px;
             font-size:14px;
+
+            .linkURL{
+                white-space: nowrap; 
+                overflow: hidden;
+                text-overflow: ellipsis;
+                width:40%;
+            }
+
+            .shortenedURL{
+                cursor:pointer;
+            }
         }
 
         .TrashIconSection{
