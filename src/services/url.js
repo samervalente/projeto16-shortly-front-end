@@ -5,6 +5,7 @@ export function getUserURLS(config, setURLS){
   axios.get("https://projeto-16-shortly-back.herokuapp.com/users/me", config).then(response => {
       setURLS(response.data)
     }).catch(error => {
+      console.log(error)
       alert(error.data)
     })
 
@@ -22,11 +23,12 @@ export function shortenURL(url, config, setURLS){
 }
 
 export function openShortURL(shortURL, config){
-  console.log(shortURL)
-  axios.get(`https://projeto-16-shortly-back.herokuapp.com/urls/open/${shortURL}`, config).then(() => {
-    console.log('a')
+  
+  axios.get(`https://projeto-16-shortly-back.herokuapp.com/urls/open/${shortURL}`).then(() => {
+    console.log("ok")
   })
   .catch(error => {
+    console.log(error)
       alert(error.data)
     })
 }

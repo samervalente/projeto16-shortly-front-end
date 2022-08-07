@@ -34,9 +34,13 @@ export default function Login(){
         <>
             <TopBar justify={'flex-end'}>
                     <ul>
+                        <Link to="/">
+                            <li>Início</li>
+                        </Link>
                         <Link to="/register">
                             <li>Cadastrar-se</li>
                         </Link>
+                        
                     </ul>
             </TopBar>
             

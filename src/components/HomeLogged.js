@@ -16,10 +16,15 @@ export default function HomeLogged(){
     const [urls, setURLS] = useState([])
     const {user} = useContext(userContext)
     const config = {headers: { authorization: `Bearer ${user.token}`}}
-
+    console.log(user)
     useEffect(() => {
         getUserURLS(config, setURLS)
     }, [])
+
+    // function openLink(shortURL){
+    //     window.open(`https://projeto-16-shortly-back.herokuapp.com/urls/open/${shortURL}`)
+    //     getUserURLS(config, setURLS)
+    // }
 
     
     function renderUserURLS(){
@@ -30,7 +35,7 @@ export default function HomeLogged(){
              <div className="URLSection">
                  <div className="LinkInfosSection">
                      <a className="linkURL"  href={obj.url} target="_blank"  rel="noreferrer">{obj.url}</a>
-                     <p  className="shortenedURL"onClick={() => openShortURL(obj.shortURL, config)}>{obj.shortURL}  </p>
+                     <p  className="shortenedURL"onClick={() => openShortURL(obj.shortURL)}>{obj.shortURL}  </p>
                      <p>Quantidade de visitantes: {obj.visitCount}</p>
                  </div>
                  <div className="TrashIconSection">
