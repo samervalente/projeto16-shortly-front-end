@@ -17,7 +17,9 @@ export default function HomeLogged(){
     const {user} = useContext(userContext)
     const config = {headers: { authorization: `Bearer ${user.token}`}}
     useEffect(() => {
+        
         getUserURLS(config, setURLS)
+        
     }, [])
 
 
@@ -65,7 +67,7 @@ export default function HomeLogged(){
         <Main className="Container">
             <div className="shortURL">
                 <Input placeholder={'Links que cabem no bolso'} onChange={(e) => setURLToShort({url: e.target.value})} />
-                <Button onClick={() => shortenURL(urlToShort, config, setURLS)} label={'Encurtar Link'} />
+                <Button onClick={() => shortenURL(urlToShort, config, setURLS, setURLToShort)} label={'Encurtar Link'} />
             </div>
                 {renderUserURLS()}
            

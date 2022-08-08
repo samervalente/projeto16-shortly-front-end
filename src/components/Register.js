@@ -7,9 +7,12 @@ import TopBar from "../shared/TopBar";
 import Input from "../shared/Input";
 import Button from "../shared/Button";
 import * as api from "../services/auth";
+import shortlyLoader from "../assets/images/Shortly_Loader.svg"
+
 
 export default function Register() {
   const navigate = useNavigate();
+  const [registerProcess, setRegisterProcess] = useState(false)
   const [userData, setUserData] = useState({
     name: "",
     email: "",
@@ -25,16 +28,19 @@ export default function Register() {
 
   async function handleSubmit(event) {
     event.preventDefault();
-   
+
     const { name, email, password, confirmPassword } = userData;
-    console.log(password, "confirm: " + confirmPassword)
+   
     if (password !== confirmPassword) {
       alert("As senhas devem ser iguais.");
     } else {
       await api
         .registerUser(name, email, password, confirmPassword)
         .then(() => {
-          navigate("/login");
+          setRegisterProcess(true)
+          setTimeout(() => {
+            navigate("/login")
+        }, 1000)
         })
         .catch((error) => {
           alert(error.data);
@@ -67,7 +73,7 @@ export default function Register() {
         </ul>
       </TopBar>
       
-      <Form className="Container Form" onSubmit={handleSubmit}>
+      {registerProcess ?  <img src={shortlyLoader}/> : <Form className="Container Form" onSubmit={handleSubmit}>
         <Input
           placeholder={"Nome"}
           onChange={(e) => setUserData({ ...userData, name: e.target.value })}
@@ -115,7 +121,7 @@ export default function Register() {
         </div>
 
         <Button label={"Cadastrar"} />
-      </Form>
+      </Form>}
     </>
   );
 }

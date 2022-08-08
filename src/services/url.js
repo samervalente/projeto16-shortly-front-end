@@ -1,5 +1,6 @@
 
 import axios from "axios"
+import { toast } from 'react-toastify';
 
 const API_URL = function (endpoint){
   return `https://projeto-16-shortly-back.herokuapp.com${endpoint}`
@@ -15,16 +16,20 @@ export function getUserURLS(config, setURLS){
 
 }
 
-export function shortenURL(url, config, setURLS){
-
+export function shortenURL(url, config, setUserURLS, setURLToShort){
+  
   axios.post(API_URL('/urls/shorten'), url, config)
   .then(() => {
-    getUserURLS(config, setURLS)
+    getUserURLS(config, setUserURLS)
+    
   })
   .catch(() => {
     alert("URL Inválida")
   })
+ 
+  toast("Default Notification !");
 }
+
 
 export function openShortURL(shortURL, url, config, setURLS){
   console.log(API_URL(`/urls/open/${shortURL}`))
@@ -43,13 +48,17 @@ export function deleteShortURL(shortURLid, config, setURLS){
   if(isConfirm){
     axios.delete(API_URL(`/urls/${shortURLid}`))
     .then( () => {
+     
       getUserURLS(config, setURLS)
     })
     .catch(error => {
       alert(error.data)
     })
   }
+ 
 }
+
+
 
 export function listRanking(setRanking){
   axios.get(API_URL('/ranking')).then(response => {
