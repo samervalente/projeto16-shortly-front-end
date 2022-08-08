@@ -12,16 +12,16 @@ export default function RankingList(){
             return (            
             <li className="userRankingSection">
                 <span className="nameRanking">{rank.name} - </span>
-                <span>{rank.linksCount} {rank.linksCount > 1? "links" : "link"} - {rank.visitCount} - visualizações
+                <span>{rank.linksCount} {rank.linksCount > 1? "links" : "link"} -   
+                {Number(rank.visitCount) === 0 ? " nenhuma visualização" :
+                   ` ${rank.visitCount} ${rank.visitCount > 1? " visualizações":" visualização"}`
+                }
                 </span>
             </li>)
         })  
     }
-
     return (
-
-
-
+        
         <Ranking>   
             {rankingList.length === 0 ? 
             <p>Ninguém encurtou um link ainda 😢. Que tal você ser o primeiro?</p> 

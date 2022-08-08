@@ -1,8 +1,12 @@
 
 import axios from "axios"
 
+const API_URL = function (endpoint){
+  return `https://projeto-16-shortly-back.herokuapp.com${endpoint}`
+}
+
 export function getUserURLS(config, setURLS){
-  axios.get("https://projeto-16-shortly-back.herokuapp.com/users/me", config).then(response => {
+  axios.get(API_URL('/users/me'), config).then(response => {
       setURLS(response.data)
     }).catch(error => {
       console.log(error)
@@ -12,8 +16,8 @@ export function getUserURLS(config, setURLS){
 }
 
 export function shortenURL(url, config, setURLS){
-  console.log(url)
-  axios.post("https://projeto-16-shortly-back.herokuapp.com/urls/shorten",url, config)
+
+  axios.post(API_URL('/urls/shorten'), url, config)
   .then(() => {
     getUserURLS(config, setURLS)
   })
@@ -23,12 +27,11 @@ export function shortenURL(url, config, setURLS){
 }
 
 export function openShortURL(shortURL, config){
-  
-  axios.get(`https://projeto-16-shortly-back.herokuapp.com/urls/open/${shortURL}`).then(() => {
-    console.log("ok")
+  console.log(API_URL(`/urls/open/${shortURL}`))
+  axios.get(API_URL(`/urls/open/${shortURL}`), config).then(() => {
+    window.open()
   })
   .catch(error => {
-    console.log(error)
       alert(error.data)
     })
 }
@@ -36,7 +39,7 @@ export function openShortURL(shortURL, config){
 export function deleteShortURL(shortURLid, config, setURLS){
  let isConfirm = window.confirm('Você deseja excluir essa URL? ')
   if(isConfirm){
-    axios.delete(`https://projeto-16-shortly-back.herokuapp.com/urls/${shortURLid}`)
+    axios.delete(API_URL(`/urls/${shortURLid}`))
     .then( () => {
       getUserURLS(config, setURLS)
     })
@@ -47,7 +50,7 @@ export function deleteShortURL(shortURLid, config, setURLS){
 }
 
 export function listRanking(setRanking){
-  axios.get("https://projeto-16-shortly-back.herokuapp.com/ranking").then(response => {
+  axios.get(API_URL('/ranking')).then(response => {
     setRanking(response.data)
   }).catch(error => {
     alert(error.data)

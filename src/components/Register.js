@@ -21,13 +21,17 @@ export default function Register() {
     ConfirmPasswordLabel: true,
   });
 
-  function handleSubmit(event) {
+  
+
+  async function handleSubmit(event) {
     event.preventDefault();
+   
     const { name, email, password, confirmPassword } = userData;
+    console.log(password, "confirm: " + confirmPassword)
     if (password !== confirmPassword) {
       alert("As senhas devem ser iguais.");
     } else {
-      api
+      await api
         .registerUser(name, email, password, confirmPassword)
         .then(() => {
           navigate("/login");
@@ -38,17 +42,14 @@ export default function Register() {
     }
   }
 
-  async function seePassword(label) {
-    const a = !type.PasswordLabel;
-    const b = !type.ConfirmPasswordLabel;
-    console.log(a);
+     function seePassword(label) {
     label = label === "password" ? "password" : "confirmPassword";
     switch (label) {
       case "password":
-        setType({ ...type, PasswordLabel: a });
+        setType({ ...type, PasswordLabel: !type.PasswordLabel });
         break;
       case "confirmPassword":
-        setType({ ...type, ConfirmPasswordLabel: b });
+        setType({ ...type, ConfirmPasswordLabel: !type.ConfirmPasswordLabel });
         break;
     }
   }
@@ -97,10 +98,10 @@ export default function Register() {
         <div className="passwordSection">
           <Input
             className="passwordInput"
-            placeholder={"Senha"}
+            placeholder={"Confirme a senha"}
             type={type.ConfirmPasswordLabel ? "password" : ""}
             onChange={(e) =>
-              setUserData({ ...userData, password: e.target.value })
+              setUserData({ ...userData, confirmPassword: e.target.value })
             }
           />
 

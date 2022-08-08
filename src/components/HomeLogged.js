@@ -16,19 +16,13 @@ export default function HomeLogged(){
     const [urls, setURLS] = useState([])
     const {user} = useContext(userContext)
     const config = {headers: { authorization: `Bearer ${user.token}`}}
-    console.log(user)
     useEffect(() => {
         getUserURLS(config, setURLS)
     }, [])
 
-    // function openLink(shortURL){
-    //     window.open(`https://projeto-16-shortly-back.herokuapp.com/urls/open/${shortURL}`)
-    //     getUserURLS(config, setURLS)
-    // }
 
     
     function renderUserURLS(){
-        console.log(urls)
        if(urls.length !== 0 ){ 
         const userURLS = urls.shortenedUrls.map(obj => {
             return (
@@ -42,8 +36,7 @@ export default function HomeLogged(){
                      <FaTrash onClick={() => deleteShortURL(obj.id, config, setURLS)} className={'TrashIcon'} />
                  </div>
               </div>
-            )
-            
+            )  
          })
         
          return userURLS.reverse()

@@ -2,12 +2,10 @@ import { useNavigate, Link } from "react-router-dom"
 import TopBar from "../shared/TopBar"
 import Input from "../shared/Input"
 import Button from "../shared/Button"
-import * as api from "../services/auth"
 import { useState, useContext } from "react"
 import userContext from "../contexts/userContext"
-import axios from "axios"
+import * as api from "../services/auth"
 
-axios.defaults.withCredentials = false
 export default function Login(){
     const navigate = useNavigate()
     const [userData, setUserData] = useState({
@@ -16,18 +14,16 @@ export default function Login(){
     })
     const {setUser} = useContext(userContext)
     
-
-    function handleSubmit(e){
+     async function handleSubmit(e){
         e.preventDefault()
-
-        axios.post("https://projeto-16-shortly-back.herokuapp.com/signin", userData).then(response => {
-            setUser(response.data)
-            navigate('/home')
-          }).catch(error => {
-            console.log(error)
-            alert(error.response.data)
-          }) 
-        
+        const {email, password} = userData
+        try {
+            const response = await api.sendLogin(email, password)
+            setUser(response)
+            navigate("/home")
+        } catch (error) {
+            alert(error.data)
+        }
     }
 
     return (
