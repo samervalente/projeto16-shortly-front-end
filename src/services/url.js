@@ -26,10 +26,12 @@ export function shortenURL(url, config, setURLS){
   })
 }
 
-export function openShortURL(shortURL, config){
+export function openShortURL(shortURL, url, config, setURLS){
   console.log(API_URL(`/urls/open/${shortURL}`))
   axios.get(API_URL(`/urls/open/${shortURL}`), config).then(() => {
-    window.open()
+    getUserURLS(config, setURLS)
+    window.open(url)
+    
   })
   .catch(error => {
       alert(error.data)

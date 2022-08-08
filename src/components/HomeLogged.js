@@ -29,7 +29,7 @@ export default function HomeLogged(){
              <div className="URLSection">
                  <div className="LinkInfosSection">
                      <a className="linkURL"  href={obj.url} target="_blank"  rel="noreferrer">{obj.url}</a>
-                     <p  className="shortenedURL"onClick={() => openShortURL(obj.shortURL)}>{obj.shortURL}  </p>
+                     <p  className="shortenedURL"onClick={() => openShortURL(obj.shortURL, obj.url, config, setURLS)}>{obj.shortURL}  </p>
                      <p>Quantidade de visitantes: {obj.visitCount}</p>
                  </div>
                  <div className="TrashIconSection">
