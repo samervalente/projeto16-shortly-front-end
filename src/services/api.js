@@ -6,7 +6,8 @@ const axiosWrapper = {}
 const queryStringBuilder = query => Object.keys(query).length ? '?' + Object.keys(query).map(k => `${k}=${query[k]}`).join('&') : '';
 
 const instance = axios.create({
-    baseURL: 'https://projeto-16-shortly-back.herokuapp.com'
+    //baseURL: 'https://projeto-16-shortly-back.herokuapp.com'
+    baseURL: 'http://localhost:4001'
   });
 
 for(const method of methods){

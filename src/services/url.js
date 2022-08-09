@@ -3,7 +3,8 @@ import axios from "axios"
 import { toast } from 'react-toastify';
 
 const API_URL = function (endpoint){
-  return `https://projeto-16-shortly-back.herokuapp.com${endpoint}`
+  //return `https://projeto-16-shortly-back.herokuapp.com${endpoint}`
+  return `http://localhost:4001${endpoint}`
 }
 
 export function getUserURLS(config, setURLS){
@@ -35,7 +36,7 @@ export function openShortURL(shortURL, url, config, setURLS){
   console.log(API_URL(`/urls/open/${shortURL}`))
   axios.get(API_URL(`/urls/open/${shortURL}`), config).then(() => {
     getUserURLS(config, setURLS)
-    window.open(url)
+   
     
   })
   .catch(error => {
